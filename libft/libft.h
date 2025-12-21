@@ -24,7 +24,7 @@
 typedef struct s_list
 {
 	void				*content;
-	struct s_list	*next;
+	struct s_list		*next;
 }	t_list;
 
 int					ft_isalnum(int c);
@@ -42,7 +42,8 @@ size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 void				ft_striteri(char *s, void (*f)(unsigned int, char*));
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
-char				*ft_strnstr(const char *big, const char *little, size_t len);
+char				*ft_strnstr(const char *big, const char *little,
+						size_t len);
 char				*ft_strdup(const char *s);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
@@ -59,7 +60,7 @@ void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_calloc(size_t nmemb, size_t size);
 
 int					ft_atoi(const char *nptr);
-char					*ft_itoa(int n);
+char				*ft_itoa(int n);
 
 void				ft_putchar_fd(char c, int fd);
 void				ft_putendl_fd(char *s, int fd);
@@ -73,7 +74,8 @@ void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 t_list				*ft_lstlast(t_list *lst);
-t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
+						void (*del)(void *));
 t_list				*ft_lstnew(void *content);
 
 int					ft_printf(const char *text, ...);

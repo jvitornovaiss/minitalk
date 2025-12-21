@@ -28,6 +28,12 @@ static void	ft_send_bits(int pid, char i)
 	}
 }
 
+static void	send_error(const char *msg)
+{
+	ft_printf(msg);
+	exit(EXIT_FAILURE);
+}
+
 int	main(int argc, char **argv)
 {
 	int	pid;
@@ -39,8 +45,7 @@ int	main(int argc, char **argv)
 		pid = ft_atoi(argv[1]);
 		if (pid <= 0)
 		{
-			ft_printf("\033[91mError: wrong format.\033[0m\n");
-			exit(EXIT_FAILURE);
+			send_error("\033[91mError: wrong format.\033[0m\n");
 		}
 		while (argv[2][i] != '\0')
 		{
