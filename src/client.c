@@ -37,6 +37,11 @@ int	main(int argc, char **argv)
 	if (argc == 3)
 	{
 		pid = ft_atoi(argv[1]);
+		if (pid <= 0)
+		{
+			ft_printf("\033[91mError: wrong format.\033[0m\n");
+			exit(EXIT_FAILURE);
+		}
 		while (argv[2][i] != '\0')
 		{
 			ft_send_bits(pid, argv[2][i]);

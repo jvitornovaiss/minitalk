@@ -31,7 +31,7 @@ void	ft_handler(int signal)
 int main(void)
 {
 	ft_printf("Server's PID: %d\n", getpid());
-	ft_printf("Aguardando pela mensagem\n");
+	ft_printf("Waiting for the message\n");
 	signal(SIGUSR1, ft_handler);
 	signal(SIGUSR2, ft_handler);
 	while (1)
