@@ -12,28 +12,38 @@
 
 #include "minitalk.h"
 
-void	ft_handler(int signal)
+static void	ft_handler(int signal, siginfo_t *info, void *context)
 {
 	static int	bit;
-	static int	i;
+	static char	c;
 
-	if (signal == SIGUSR1)
-		i |= (0x01 << bit);
+	(void)context;
+	if (signal == SIGUSR2)
+		c |= (128 >> bit);
 	bit++;
 	if (bit == 8)
 	{
-		ft_printf("%c", i);
+		if (c == '\0')
+			ft_printf("\n");
+		else
+			ft_printf("%c", c);
 		bit = 0;
-		i = 0;
+		c = 0;
 	}
+	kill(info->si_pid, SIGUSR1);
 }
 
 int	main(void)
 {
-	ft_printf("Server's PID: %d\n", getpid());
-	ft_printf("Waiting for the message...\n");
-	signal(SIGUSR1, ft_handler);
-	signal(SIGUSR2, ft_handler);
+	struct sigaction	sa;
+
+	ft_printf("Server PID: %d\n", getpid());
+	ft_printf("Waiting for messages...\n");
+	sigemptyset(&sa.sa_mask);
+	sa.sa_sigaction = ft_handler;
+	sa.sa_flags = SA_SIGINFO;
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
 		pause();
 	return (0);
